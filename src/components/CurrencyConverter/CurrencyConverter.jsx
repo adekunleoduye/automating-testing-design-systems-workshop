@@ -34,13 +34,6 @@ function getNumericCode(currency, data = ISO) {
   const numericCode = data.find((iso) => iso["Alphabetic Code"] === currency);
 
   if (numericCode === null) return "No Results";
-  // if (currency === "EUR") {
-  //   return {
-  //   currencyName: numericCode.Currency,
-  //   numberCode: numericCode["Numeric Code"],
-  //   currencyCode: numericCode["Alphabetic Code"]
-  // };
-  // }
 
   return {
     currencyName: numericCode.Currency,
@@ -58,7 +51,7 @@ export function CurrencyItem({
   currencyList,
   setCurrencyList
 }) {
-  const { currencyName, numberCode, currencyCode } = getNumericCode(currency);
+  const { currencyName, numberCode } = getNumericCode(currency);
 
   const showDeleteButton = isEditing && currency !== baseCurrency;
 
@@ -129,54 +122,6 @@ export function CurrencyItem({
     </div>
   );
 }
-// export function CurrencyItem({ countryCode, setBaseValue, baseValue }) {
-//   const { currency, countryName, iso } = getAllInfoByISO(countryCode);
-//   console.log(baseValue);
-
-// function handleChange(e) {
-//   setBaseValue(e.target.value);
-// }
-
-//   return (
-{
-  /* <div className={styles.currencyItem}>
-  <div className={styles.flagWrapper}>
-    <img
-      className={styles.flag}
-      src={`https://flagcdn.com/${iso.toLowerCase()}.svg`}
-      alt="USA Flag"
-    />
-  </div>
-  <div className={styles.infoWrapper}>
-    <div className={styles.nameShort}>{currency}</div>
-    <div className={styles.nameLong}>{countryName}</div>
-  </div>
-  <div className={styles.valueWrapper}>
-    {currency === "USD" ? (
-      <InputGroup className={cn(styles.currencyInput)}>
-        <InputGroup.Text>$</InputGroup.Text>
-        <FormControl
-          aria-label="Amount (to the nearest dollar)"
-          defaultValue={RATES[currency]}
-          onChange={handleChange}
-        />
-      </InputGroup>
-    ) : (
-      <>
-        <div className={styles.currencyValue}>
-          {getSymbolFromCurrency("USD")}{" "}
-          {(RATES[currency] * baseValue).toFixed(2)}
-        </div>
-        <div className={styles.currencyConversion}>
-          1 USD = {RATES[currency]} {currency}
-        </div>
-      </>
-    )}
-  </div>
-</div> */
-}
-//   );
-// }
 
 export default function CurrencyConverter({
   loading = false,
@@ -185,7 +130,7 @@ export default function CurrencyConverter({
   setCurrencyList,
   baseCurrency,
   setBaseCurrency,
-  editing
+  editing = false
 }) {
   const [baseValue, setBaseValue] = useState(1);
   const [isAddingCurrency, setIsAddingCurrency] = useState(false);

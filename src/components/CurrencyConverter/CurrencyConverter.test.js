@@ -26,6 +26,7 @@ describe("Currency Converter", () => {
 
       expect(input).toBeInTheDocument();
       userEvent.type(input, "NGN");
+
       const currencyBtn = await screen.findByRole("option", { name: /NGN/i });
       await userEvent.click(currencyBtn);
       const applyBtn = await screen.findByRole("button", { name: /Apply/i });
@@ -40,6 +41,7 @@ describe("Currency Converter", () => {
       render(<Default />);
       const currency = screen.getByText("CAD");
       expect(currency).toBeInTheDocument();
+
       const editBtn = screen.getByRole("button", {
         name: /Edit Currency List/i
       });
